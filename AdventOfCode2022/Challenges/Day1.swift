@@ -7,48 +7,55 @@
 
 import Foundation
 
-class Day1 {
-    private let sampleInput = "day1_sample.txt"
-    private let dayInput = "day1input.txt"
+fileprivate typealias Calories = Int
+
+class Day1: DayProtocol {
+    let sampleInput = "day1sample.txt"
+    let dayInput = "day1input.txt"
     
-    private func readSampleInput() -> Array<Substring> {
+    func readSampleInput() -> Array<Substring> {
         return InputReader().loadFileAsStringFromUrlString(sampleInput).split(separator: "\n", omittingEmptySubsequences: false)
     }
     
-    private func readDayInput() -> Array<Substring> {
+    func readDayInput() -> Array<Substring> {
         return InputReader().loadFileAsStringFromUrlString(dayInput).split(separator: "\n", omittingEmptySubsequences: false)
     }
     
     init() {}
 
     func day1() {
-//        let input: Array<Substring> = readSampleInput()
-        let input: Array<Substring> = readDayInput()
-        let elvesRations: Array<ElfRation> = getElfRations(input: input)
-        
-        let maximumCalories: Int = getArrayOfRationTotalsFromElves(elvesRations).max()!
-        
-        print("Max Calories: ", maximumCalories)
+        let sampleInput: Array<Substring> = readSampleInput()
+        runSolution(sampleInput, InputType.sampleInput.rawValue)
 
-        day1Part2(elvesRations)
-        
-        
+        let dayInput = readDayInput()
+        runSolution(dayInput, InputType.dayInput.rawValue)
     }
     
-    func getArrayOfRationTotalsFromElves(_ elvesRations: Array<ElfRation>) -> Array<Int> {
+    func runSolution(_ input: Array<Substring>, _ inputType: String) {
+        print("Solution for \(inputType):")
+        let elvesRations: Array<ElfRation> = getElfRations(input: input)
+        
+        // part 1
+        let maximumCalories: Calories = getArrayOfRationTotalsFromElves(elvesRations).max()!
+        tabbedPrint("Highest-calorie ration: ", maximumCalories)
+
+        // part 2
+        findHighest3ElfCalories(elvesRations)
+    }
+    
+    fileprivate func getArrayOfRationTotalsFromElves(_ elvesRations: Array<ElfRation>) -> Array<Calories> {
         return elvesRations.map {
-            elfRation -> Int in elfRation.totalCalories
+            elfRation -> Calories in elfRation.totalCalories
         }
     }
     
-    // find top 3 calories from elves
-    func day1Part2(_ elvesRations: Array<ElfRation>) {
-        let calorieTotals: Array<Int>  = getArrayOfRationTotalsFromElves(elvesRations)
-        let top3: Array<Int> = calorieTotals.sorted(by: >)
-        print("Total of top 3: ", top3.prefix(3).reduce(0, +))
+    fileprivate func findHighest3ElfCalories(_ elvesRations: Array<ElfRation>) {
+        let calorieTotals: Array<Calories>  = getArrayOfRationTotalsFromElves(elvesRations)
+        let highest3CalorieElements: Array<Calories> = calorieTotals.sorted(by: >)
+        tabbedPrint("Sum of top three highest-calorie rations: ", highest3CalorieElements.prefix(3).reduce(0, +))
     }
     
-    func getElfRations(input: Array<Substring>) -> Array<ElfRation> {
+    fileprivate func getElfRations(input: Array<Substring>) -> Array<ElfRation> {
         var elvesRations: Array<ElfRation> = Array<ElfRation>()
         var currentElfRation = ElfRation()
         
@@ -57,22 +64,22 @@ class Day1 {
                 elvesRations.append(currentElfRation)
                 currentElfRation = ElfRation()
             } else {
-                currentElfRation.addRation(ration: Int(elem)!)
+                currentElfRation.addRation(ration: Calories(elem)!)
             }
         }
         return elvesRations
     }
 }
 
-class ElfRation {
+fileprivate class ElfRation {
     private var rations: Array<Int> = Array<Int>()
-    fileprivate var totalCalories: Int {
+    fileprivate var totalCalories: Calories {
         return rations.reduce(0,+)
     }
     
     init() {}
     
-    fileprivate func addRation(ration: Int) {
+    fileprivate func addRation(ration: Calories) {
         rations.append(ration)
     }
 }
