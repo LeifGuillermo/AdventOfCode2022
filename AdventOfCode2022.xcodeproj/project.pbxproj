@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		296A9DFE2938F3AB0093769E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9DFD2938F3AB0093769E /* main.swift */; };
+		296A9E062938F3F60093769E /* InputReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E052938F3F60093769E /* InputReader.swift */; };
+		296A9E082938F4230093769E /* InputDirectoryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E072938F4230093769E /* InputDirectoryConfig.swift */; };
+		296A9E0A2938F4400093769E /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E092938F4400093769E /* Utility.swift */; };
+		296A9E0F29390AD50093769E /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E0E29390AD50093769E /* Day1.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +29,12 @@
 /* Begin PBXFileReference section */
 		296A9DFA2938F3AB0093769E /* AdventOfCode2022 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AdventOfCode2022; sourceTree = BUILT_PRODUCTS_DIR; };
 		296A9DFD2938F3AB0093769E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		296A9E052938F3F60093769E /* InputReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputReader.swift; sourceTree = "<group>"; };
+		296A9E072938F4230093769E /* InputDirectoryConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputDirectoryConfig.swift; sourceTree = "<group>"; };
+		296A9E092938F4400093769E /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		296A9E0B29390A630093769E /* day1_sample.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day1_sample.txt; sourceTree = "<group>"; };
+		296A9E0E29390AD50093769E /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
+		296A9E1029390BCA0093769E /* day1input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day1input.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +51,7 @@
 		296A9DF12938F3AB0093769E = {
 			isa = PBXGroup;
 			children = (
+				296A9E042938F3C80093769E /* Resources */,
 				296A9DFC2938F3AB0093769E /* AdventOfCode2022 */,
 				296A9DFB2938F3AB0093769E /* Products */,
 			);
@@ -57,9 +68,38 @@
 		296A9DFC2938F3AB0093769E /* AdventOfCode2022 */ = {
 			isa = PBXGroup;
 			children = (
+				296A9E0D29390AA80093769E /* Readers */,
+				296A9E0C29390A910093769E /* Challenges */,
 				296A9DFD2938F3AB0093769E /* main.swift */,
 			);
 			path = AdventOfCode2022;
+			sourceTree = "<group>";
+		};
+		296A9E042938F3C80093769E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				296A9E0B29390A630093769E /* day1_sample.txt */,
+				296A9E1029390BCA0093769E /* day1input.txt */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		296A9E0C29390A910093769E /* Challenges */ = {
+			isa = PBXGroup;
+			children = (
+				296A9E092938F4400093769E /* Utility.swift */,
+				296A9E0E29390AD50093769E /* Day1.swift */,
+			);
+			path = Challenges;
+			sourceTree = "<group>";
+		};
+		296A9E0D29390AA80093769E /* Readers */ = {
+			isa = PBXGroup;
+			children = (
+				296A9E052938F3F60093769E /* InputReader.swift */,
+				296A9E072938F4230093769E /* InputDirectoryConfig.swift */,
+			);
+			path = Readers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +160,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				296A9E0A2938F4400093769E /* Utility.swift in Sources */,
+				296A9E0F29390AD50093769E /* Day1.swift in Sources */,
+				296A9E082938F4230093769E /* InputDirectoryConfig.swift in Sources */,
 				296A9DFE2938F3AB0093769E /* main.swift in Sources */,
+				296A9E062938F3F60093769E /* InputReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
