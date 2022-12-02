@@ -11,14 +11,6 @@ class Day2: DayProtocol {
     let sampleInput = "day2sample.txt"
     let dayInput = "day2input.txt"
     
-    func readSampleInput() -> Array<Substring> {
-        return InputReader().loadFileAsStringFromUrlString(sampleInput).split(separator: "\n", omittingEmptySubsequences: false)
-    }
-    
-    func readDayInput() -> Array<Substring> {
-        return InputReader().loadFileAsStringFromUrlString(dayInput).split(separator: "\n", omittingEmptySubsequences: false)
-    }
-    
     func day2() throws {
         let sampleInput: Array<Substring> = readSampleInput()
         let dayInput: Array<Substring> = readDayInput()

@@ -14,6 +14,7 @@
 		296A9E0F29390AD50093769E /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E0E29390AD50093769E /* Day1.swift */; };
 		296A9E1229394E7A0093769E /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E1129394E7A0093769E /* Day2.swift */; };
 		296A9E1429394EF80093769E /* DayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E1329394EF80093769E /* DayProtocol.swift */; };
+		296A9E18293A92A20093769E /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E17293A92A20093769E /* Day3.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,6 +42,9 @@
 		296A9E1329394EF80093769E /* DayProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayProtocol.swift; sourceTree = "<group>"; };
 		296A9E15293A4D0B0093769E /* day2sample.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2sample.txt; sourceTree = "<group>"; };
 		296A9E16293A4D290093769E /* day2input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day2input.txt; sourceTree = "<group>"; };
+		296A9E17293A92A20093769E /* Day3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day3.swift; sourceTree = "<group>"; };
+		296A9E19293A92F20093769E /* day3sample.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3sample.txt; sourceTree = "<group>"; };
+		296A9E1A293A93070093769E /* day3input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day3input.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,8 @@
 				296A9E1029390BCA0093769E /* day1input.txt */,
 				296A9E15293A4D0B0093769E /* day2sample.txt */,
 				296A9E16293A4D290093769E /* day2input.txt */,
+				296A9E19293A92F20093769E /* day3sample.txt */,
+				296A9E1A293A93070093769E /* day3input.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -96,9 +102,10 @@
 		296A9E0C29390A910093769E /* Challenges */ = {
 			isa = PBXGroup;
 			children = (
+				296A9E1329394EF80093769E /* DayProtocol.swift */,
 				296A9E0E29390AD50093769E /* Day1.swift */,
 				296A9E1129394E7A0093769E /* Day2.swift */,
-				296A9E1329394EF80093769E /* DayProtocol.swift */,
+				296A9E17293A92A20093769E /* Day3.swift */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 				296A9E0F29390AD50093769E /* Day1.swift in Sources */,
 				296A9E082938F4230093769E /* InputDirectoryConfig.swift in Sources */,
 				296A9DFE2938F3AB0093769E /* main.swift in Sources */,
+				296A9E18293A92A20093769E /* Day3.swift in Sources */,
 				296A9E062938F3F60093769E /* InputReader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
