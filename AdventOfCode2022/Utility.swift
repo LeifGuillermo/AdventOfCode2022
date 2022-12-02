@@ -23,8 +23,8 @@ func tabbedPrint(_ items: Any..., separator: String = " ", terminator: String = 
     print(items, separator: separator, terminator: terminator)
 }
 
-extension StringProtocol {
-    subscript(offset: Int) -> Character {
-        self[index(startIndex, offsetBy: offset - 1)]
-    }
+func convertNewlineEntriesToSubstringArraysSplitBySpaces(_ input: Array<Substring>) -> [Array<Substring>] {
+    return input
+        .map { return String($0).split(separator: " ") }
+        .filter{ !$0.isEmpty }
 }

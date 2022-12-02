@@ -7,4 +7,5 @@
 
 import Foundation
 
-Day1().day1()
+//Day1().day1()
+try Day2().day2()
