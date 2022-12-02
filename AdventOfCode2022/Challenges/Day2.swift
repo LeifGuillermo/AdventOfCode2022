@@ -28,72 +28,72 @@ class Day2: DayProtocol {
     }
     
     func solve(_ input: Array<Substring>) throws {
-        let splitLines: [Array<Substring>] = convertNewlineEntriesToSubstringArraysSplitBySpaces(input)
+        let rockPaperScissorRounds: [Array<Substring>] = convertNewlineEntriesToSubstringArraysSplitBySpaces(input)
         
-        let score: Int = try part1(splitLines)
-        let part2score: Int = try part2(splitLines)
+        let score: Int = try part1(rockPaperScissorRounds)
+        let part2score: Int = try part2(rockPaperScissorRounds)
         
         print("Part 1 Total Score: ", score)
         print("Part 2 Total Score: ", part2score)
     }
     
-    func part1(_ splitLines: [Array<Substring>]) throws -> Int{
-        return try splitLines.map {
-            try determineWinningPlayer(otherPlayerChoice: String($0[0]), playerChoice: String($0[1]))
+    func part1(_ rockPaperScissorRounds: [Array<Substring>]) throws -> Int{
+        return try rockPaperScissorRounds.map {
+            try calculatePointsGivenChoices(opponentChoice: String($0[0]), playerChoice: String($0[1]))
         }.reduce(0, +)
     }
     
-    func part2(_ splitLines: [Array<Substring>]) throws -> Int{
-        return try splitLines.map {
-            try playerPointsForPart2(otherPlayerChoice: String($0[0]), playerChoice: String($0[1]))
+    func part2(_ rockPaperScissorRounds: [Array<Substring>]) throws -> Int{
+        return try rockPaperScissorRounds.map {
+            try calculatePointsGivenStrategy(otherPlayerChoice: String($0[0]), playerStrategy: String($0[1]))
         }.reduce(0, +)
     }
 }
 
-func determineWinningPlayer(otherPlayerChoice: String, playerChoice: String) throws -> Int {
+fileprivate func calculatePointsGivenChoices(opponentChoice: String, playerChoice: String) throws -> Int {
     var points: Int = 0
     switch(playerChoice) {
-    case PlayerRPS.rock.rawValue:
+    case PlayerChoice.rock.rawValue:
         points += ChoicePoints.rock.rawValue
-    case PlayerRPS.paper.rawValue:
+    case PlayerChoice.paper.rawValue:
         points += ChoicePoints.paper.rawValue
-    case PlayerRPS.scissors.rawValue:
+    case PlayerChoice.scissors.rawValue:
         points += ChoicePoints.scissors.rawValue
     default:
         throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
     }
     
-    switch(otherPlayerChoice) {
-    case OponentRPS.rock.rawValue:
+    switch(opponentChoice) {
+    case OpponentChoice.rock.rawValue:
         switch(playerChoice) {
-        case PlayerRPS.rock.rawValue:
-            points += ScoreAddition.draw.rawValue
-        case PlayerRPS.paper.rawValue:
-            points += ScoreAddition.win.rawValue
-        case PlayerRPS.scissors.rawValue:
-            points += ScoreAddition.loss.rawValue
+        case PlayerChoice.rock.rawValue:
+            points += OutcomeScore.draw.rawValue
+        case PlayerChoice.paper.rawValue:
+            points += OutcomeScore.win.rawValue
+        case PlayerChoice.scissors.rawValue:
+            points += OutcomeScore.loss.rawValue
         default:
             throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
         }
-    case OponentRPS.paper.rawValue:
+    case OpponentChoice.paper.rawValue:
         switch(playerChoice) {
-        case PlayerRPS.rock.rawValue:
-            points += ScoreAddition.loss.rawValue
-        case PlayerRPS.paper.rawValue:
-            points += ScoreAddition.draw.rawValue
-        case PlayerRPS.scissors.rawValue:
-            points += ScoreAddition.win.rawValue
+        case PlayerChoice.rock.rawValue:
+            points += OutcomeScore.loss.rawValue
+        case PlayerChoice.paper.rawValue:
+            points += OutcomeScore.draw.rawValue
+        case PlayerChoice.scissors.rawValue:
+            points += OutcomeScore.win.rawValue
         default:
             throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
         }
-    case OponentRPS.scissors.rawValue:
+    case OpponentChoice.scissors.rawValue:
         switch(playerChoice) {
-        case PlayerRPS.rock.rawValue:
-            points += ScoreAddition.win.rawValue
-        case PlayerRPS.paper.rawValue:
-            points += ScoreAddition.loss.rawValue
-        case PlayerRPS.scissors.rawValue:
-            points += ScoreAddition.draw.rawValue
+        case PlayerChoice.rock.rawValue:
+            points += OutcomeScore.win.rawValue
+        case PlayerChoice.paper.rawValue:
+            points += OutcomeScore.loss.rawValue
+        case PlayerChoice.scissors.rawValue:
+            points += OutcomeScore.draw.rawValue
         default:
             throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
         }
@@ -103,77 +103,77 @@ func determineWinningPlayer(otherPlayerChoice: String, playerChoice: String) thr
     return points
 }
 
-func playerPointsForPart2(otherPlayerChoice: String, playerChoice: String) throws -> Int{
+fileprivate func calculatePointsGivenStrategy(otherPlayerChoice: String, playerStrategy: String) throws -> Int{
     switch(otherPlayerChoice) {
-    case OponentRPS.rock.rawValue:
-        switch(playerChoice) {
+    case OpponentChoice.rock.rawValue:
+        switch(playerStrategy) {
         case Outcome.loss.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.scissors.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.scissors.rawValue)
         case Outcome.draw.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.rock.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.rock.rawValue)
         case Outcome.win.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.paper.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.paper.rawValue)
         default:
-            throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
+            throw(UnknownChoice.unknownPlayerChoice(choice: playerStrategy))
         }
-    case OponentRPS.paper.rawValue:
-        switch(playerChoice) {
+    case OpponentChoice.paper.rawValue:
+        switch(playerStrategy) {
         case Outcome.loss.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.rock.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.rock.rawValue)
         case Outcome.draw.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.paper.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.paper.rawValue)
         case Outcome.win.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.scissors.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.scissors.rawValue)
         default:
-            throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
+            throw(UnknownChoice.unknownPlayerChoice(choice: playerStrategy))
         }
-    case OponentRPS.scissors.rawValue:
-        switch(playerChoice) {
+    case OpponentChoice.scissors.rawValue:
+        switch(playerStrategy) {
         case Outcome.loss.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.paper.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.paper.rawValue)
         case Outcome.draw.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.scissors.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.scissors.rawValue)
         case Outcome.win.rawValue:
-            return try determineWinningPlayer(otherPlayerChoice: otherPlayerChoice, playerChoice: PlayerRPS.rock.rawValue)
+            return try calculatePointsGivenChoices(opponentChoice: otherPlayerChoice, playerChoice: PlayerChoice.rock.rawValue)
         default:
-            throw(UnknownChoice.unknownPlayerChoice(choice: playerChoice))
+            throw(UnknownChoice.unknownPlayerChoice(choice: playerStrategy))
         }
     default:
-        throw(UnknownChoice.unknownOtherPlayerChoice(choice: playerChoice))
+        throw(UnknownChoice.unknownOtherPlayerChoice(choice: playerStrategy))
     }
 }
 
-enum OponentRPS: String {
+fileprivate enum OpponentChoice: String {
     case rock = "A"
     case paper = "B"
     case scissors = "C"
 }
 
-enum PlayerRPS: String {
+fileprivate enum PlayerChoice: String {
     case rock = "X"
     case paper = "Y"
     case scissors = "Z"
 }
 
-enum Outcome: String {
+fileprivate enum Outcome: String {
     case loss = "X"
     case draw = "Y"
     case win = "Z"
 }
 
-enum ChoicePoints: Int {
-    case rock = 1
-    case paper = 2
-    case scissors = 3
-}
-
-enum ScoreAddition: Int {
+fileprivate enum OutcomeScore: Int {
     case loss = 0
     case draw = 3
     case win = 6
 }
 
-enum UnknownChoice: Error {
+fileprivate enum ChoicePoints: Int {
+    case rock = 1
+    case paper = 2
+    case scissors = 3
+}
+
+fileprivate enum UnknownChoice: Error {
     case unknownPlayerChoice(choice: String)
     case unknownOtherPlayerChoice(choice: String)
 }
