@@ -25,18 +25,16 @@ class Day3: DayProtocol {
     func solvePart1(_ input: Array<Substring>) {
         let contentTuples = splitSubstringsInHalf(input)
         let commonChars = findCommonChars(contentTuples)
-        let values: [UInt8] = convertCharactersToUInt8Values(commonChars)
-        let valueSum = values.map{numericCast($0)}.reduce(0,+)
+        let values: [Int] = convertCharactersToUInt8Values(commonChars)
+        let valueSum = values.reduce(0,+)
         
         print(valueSum)
     }
     
     func solvePart2(_ input: Array<Substring>) {
         let groups: [[Substring]] = groupElvesByThrees(input)
-        print(groups)
         let commonChars = findCommonCharsInGroupOfThree(groups)
-        print(commonChars)
-        let sum = convertCharactersToUInt8Values(commonChars).map{numericCast($0)}.reduce(0,+)
+        let sum = convertCharactersToUInt8Values(commonChars).reduce(0,+)
         print(sum)
     }
     
@@ -54,15 +52,13 @@ class Day3: DayProtocol {
         }
     }
     
-    
     private func testCharToValueConversion() {
         let allChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split(separator: "")
-        print(allChars.description.asciiValues)
-        let allCharValues: [UInt8] = convertCharactersToUInt8Values(allChars)
+        let allCharValues: [Int] = convertCharactersToUInt8Values(allChars)
         print(allCharValues)
     }
     
-    func convertCharactersToUInt8Values(_ chars: Array<Substring>) -> [UInt8] {
+    func convertCharactersToUInt8Values(_ chars: Array<Substring>) -> [Int] {
         return chars.map{ char in
             let value = char.asciiValues.first!
             if(value > 96) {
@@ -70,7 +66,7 @@ class Day3: DayProtocol {
             } else {
                 return (value - 38)
             }
-        }
+        }.map{numericCast($0)}
     }
     
     func findCommonChars(_ contentTuples: Array<(String, String)>) -> Array<Substring> {
@@ -83,12 +79,10 @@ class Day3: DayProtocol {
     
     func splitSubstringsInHalf(_ input: Array<Substring>) -> Array<(String, String)> {
         let stringArray = input.map {input -> String in String(input) }.filter{!$0.isEmpty}
-        
         let contentTuples: Array<(String, String)> = stringArray.map{ str -> (String, String) in
             let midIndex = str.count/2
             return (String(str.prefix(midIndex)), String(str.suffix(midIndex)))
         }
-        
         return contentTuples
     }
 }
