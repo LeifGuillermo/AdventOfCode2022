@@ -9,7 +9,7 @@ import Foundation
 
 public class InputReader {
     private let resourcesPath: String = "/Documents/Dev/AdventOfCode2022/Resources"
-
+    
     init() {
     }
     

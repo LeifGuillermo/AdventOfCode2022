@@ -93,7 +93,7 @@ class Day2: DayProtocol {
         }
         return points
     }
-
+    
     func calculatePointsGivenStrategy(otherPlayerChoice: String, playerStrategy: String) throws -> Int{
         switch(otherPlayerChoice) {
         case OpponentChoice.rock.rawValue:
@@ -133,37 +133,37 @@ class Day2: DayProtocol {
             throw(UnknownChoice.unknownOtherPlayerChoice(choice: playerStrategy))
         }
     }
-
+    
     enum OpponentChoice: String {
         case rock = "A"
         case paper = "B"
         case scissors = "C"
     }
-
+    
     enum PlayerChoice: String {
         case rock = "X"
         case paper = "Y"
         case scissors = "Z"
     }
-
+    
     enum Outcome: String {
         case loss = "X"
         case draw = "Y"
         case win = "Z"
     }
-
+    
     enum OutcomeScore: Int {
         case loss = 0
         case draw = 3
         case win = 6
     }
-
+    
     enum ChoicePoints: Int {
         case rock = 1
         case paper = 2
         case scissors = 3
     }
-
+    
     enum UnknownChoice: Error {
         case unknownPlayerChoice(choice: String)
         case unknownOtherPlayerChoice(choice: String)
