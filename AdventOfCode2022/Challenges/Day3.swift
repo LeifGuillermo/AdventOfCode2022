@@ -11,7 +11,6 @@ class Day3: DayProtocol {
     var sampleInput: String = "day3sample.txt"
     var dayInput: String = "day3input.txt"
     
-    
     func day3() {
         let sampleInput: Array<Substring> = readSampleInput()
         let dayInput: Array<Substring> = readDayInput()
