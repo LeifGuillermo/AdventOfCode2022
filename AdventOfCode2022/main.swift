@@ -8,4 +8,5 @@
 import Foundation
 
 //Day1().day1()
-try Day2().day2()
+//try Day2().day2()
+Day3().day3()

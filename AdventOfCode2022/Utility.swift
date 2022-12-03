@@ -28,3 +28,15 @@ func convertNewlineEntriesToSubstringArraysSplitBySpaces(_ input: Array<Substrin
         .map { return String($0).split(separator: " ") }
         .filter{ !$0.isEmpty }
 }
+
+extension StringProtocol {
+    var asciiValues: [UInt8] { compactMap(\.asciiValue) }
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
+    }
+}

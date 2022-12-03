@@ -13,10 +13,82 @@ class Day3: DayProtocol {
     
     
     func day3() {
+        let sampleInput: Array<Substring> = readSampleInput()
+        let dayInput: Array<Substring> = readDayInput()
         
+        solvePart1(sampleInput)
+        solvePart1(dayInput)
+        solvePart2(sampleInput)
+        solvePart2(dayInput)
     }
     
-    func solve() {
+    func solvePart1(_ input: Array<Substring>) {
+        let contentTuples = splitSubstringsInHalf(input)
+        let commonChars = findCommonChars(contentTuples)
+        let values: [UInt8] = convertCharactersToUInt8Values(commonChars)
+        let valueSum = values.map{numericCast($0)}.reduce(0,+)
         
+        print(valueSum)
+    }
+    
+    func solvePart2(_ input: Array<Substring>) {
+        let groups: [[Substring]] = groupElvesByThrees(input)
+        print(groups)
+        let commonChars = findCommonCharsInGroupOfThree(groups)
+        print(commonChars)
+        let sum = convertCharactersToUInt8Values(commonChars).map{numericCast($0)}.reduce(0,+)
+        print(sum)
+    }
+    
+    func groupElvesByThrees(_ input: Array<Substring>) -> [[Substring]] {
+        return input.filter{!$0.isEmpty}.chunked(into: 3)
+    }
+    
+    func findCommonCharsInGroupOfThree(_ rucksackGroups: [[Substring]]) -> [Substring] {
+        return rucksackGroups.map {
+            rucksackGroup -> Substring in
+            let rucksack0 = rucksackGroup[0].split(separator: "")
+            let rucksack1 = rucksackGroup[1].split(separator: "")
+            let rucksack2 = rucksackGroup[2].split(separator: "")
+            return rucksack0.filter{char in rucksack1.contains(char) && rucksack2.contains(char)}.first!
+        }
+    }
+    
+    
+    private func testCharToValueConversion() {
+        let allChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split(separator: "")
+        print(allChars.description.asciiValues)
+        let allCharValues: [UInt8] = convertCharactersToUInt8Values(allChars)
+        print(allCharValues)
+    }
+    
+    func convertCharactersToUInt8Values(_ chars: Array<Substring>) -> [UInt8] {
+        return chars.map{ char in
+            let value = char.asciiValues.first!
+            if(value > 96) {
+                return (value - 96)
+            } else {
+                return (value - 38)
+            }
+        }
+    }
+    
+    func findCommonChars(_ contentTuples: Array<(String, String)>) -> Array<Substring> {
+        contentTuples.map { (tuple: (String, String)) -> Substring in
+            let firstHalf = tuple.0.split(separator: "")
+            let secondHalf = tuple.1.split(separator: "")
+            return firstHalf.filter { char in secondHalf.contains(char) }.first!
+        }
+    }
+    
+    func splitSubstringsInHalf(_ input: Array<Substring>) -> Array<(String, String)> {
+        let stringArray = input.map {input -> String in String(input) }.filter{!$0.isEmpty}
+        
+        let contentTuples: Array<(String, String)> = stringArray.map{ str -> (String, String) in
+            let midIndex = str.count/2
+            return (String(str.prefix(midIndex)), String(str.suffix(midIndex)))
+        }
+        
+        return contentTuples
     }
 }
