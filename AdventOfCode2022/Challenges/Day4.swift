@@ -22,21 +22,23 @@ class Day4: DayProtocol {
     }
     
     func solvePart1(_ input: [Substring]) {
-        let splitLines = input.map {
-            $0.split(separator:",").map{assnmnt in assnmnt.split(separator: "-")}
-        }.filter{!$0.isEmpty}
+        let splitLines = splitLines(input)
         let integerValues = convertValuesToIntegers(splitLines)
-        let validations: [Int] = validatePairs(integerValues, validateSinglePair)
+        let validations: [Int] = validatePairs(integerValues, validateSinglePairFullOverlap)
         print(validations.reduce(0,+))
     }
     
     func solvePart2(_ input: [Substring]) {
-        let splitLines = input.map {
-            $0.split(separator:",").map{assnmnt in assnmnt.split(separator: "-")}
-        }.filter{!$0.isEmpty}
+        let splitLines = splitLines(input)
         let integerValues = convertValuesToIntegers(splitLines)
         let validations: [Int] = validatePairs(integerValues, validateSinglePairAnyOverlap)
         print(validations.reduce(0,+))
+    }
+    
+    func splitLines(_ input: [Substring]) -> [[[Substring]]] {
+        return input.map {
+            $0.split(separator:",").map{assnmnt in assnmnt.split(separator: "-")}
+        }.filter{!$0.isEmpty}
     }
     
     func convertValuesToIntegers(_ values: [[[Substring]]]) -> [[[Int]]] {
@@ -50,14 +52,12 @@ class Day4: DayProtocol {
     }
     
     func validatePairs(_ pairs: [[[Int]]], _ validationFunc: ([Int], [Int]) -> Int) -> [Int] {
-        return pairs.map { outer in
-                return validationFunc(outer.first!, outer.last!)
-        }
+        return pairs.map { validationFunc($0.first!, $0.last!) }
     }
     
-    func validateSinglePair(_ pair1: [Int],_ pair2: [Int]) -> Int{
+    func validateSinglePairFullOverlap(_ pair1: [Int],_ pair2: [Int]) -> Int{
         let leftIsInside: Bool = (pair1.first! >= pair2.first! && pair1.first! <= pair2.last!)
-            && (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
+        && (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
         let rightIsInside: Bool = (pair2.first! >= pair1.first! && pair2.first! <= pair1.last!)
         && (pair2.last! >= pair1.first! && pair2.last! <= pair1.last!)
         return ((leftIsInside || rightIsInside) ? 1 : 0)
@@ -65,7 +65,7 @@ class Day4: DayProtocol {
     
     func validateSinglePairAnyOverlap(_ pair1: [Int],_ pair2: [Int]) -> Int{
         let leftIsInside: Bool = (pair1.first! >= pair2.first! && pair1.first! <= pair2.last!)
-            || (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
+        || (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
         let rightIsInside: Bool = (pair2.first! >= pair1.first! && pair2.first! <= pair1.last!)
         || (pair2.last! >= pair1.first! && pair2.last! <= pair1.last!)
         return ((leftIsInside || rightIsInside) ? 1 : 0)
