@@ -7,8 +7,9 @@
 
 import Foundation
 
-//Day1().day1()
-//try Day2().day2()
-//Day3().day3()
-//Day4().day4()
-Day5().day5()
+//Day1().solveDay()
+//Day2().solveDay()
+//Day3().solveDay()
+//Day4().solveDay()
+//Day5().solveDay()
+Day6().solveDay()
