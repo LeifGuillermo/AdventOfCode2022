@@ -13,33 +13,14 @@ class Day1: DayProtocol {
     let sampleInput = "day1sample.txt"
     let dayInput = "day1input.txt"
     
-    func readSampleInput() -> Array<Substring> {
-        return InputReader().loadFileAsStringFromUrlString(sampleInput).split(separator: "\n", omittingEmptySubsequences: false)
-    }
-    
-    func readDayInput() -> Array<Substring> {
-        return InputReader().loadFileAsStringFromUrlString(dayInput).split(separator: "\n", omittingEmptySubsequences: false)
-    }
-    
-    init() {}
-
-    func day1() {
-        let sampleInput: Array<Substring> = readSampleInput()
-        runSolution(sampleInput, InputType.sampleInput.rawValue)
-
-        let dayInput = readDayInput()
-        runSolution(dayInput, InputType.dayInput.rawValue)
-    }
-    
-    func runSolution(_ input: Array<Substring>, _ inputType: String) {
-        print("Solution for \(inputType):")
+    func solvePart1(_ input: [Substring]) {
         let elvesRations: Array<ElfRation> = getElfRations(input: input)
-        
-        // part 1
         let maximumCalories: Calories = getArrayOfRationTotalsFromElves(elvesRations).max()!
-        tabbedPrint("Highest-calorie ration: ", maximumCalories)
-
-        // part 2
+        print(maximumCalories)
+    }
+    
+    func solvePart2(_ input: [Substring]) {
+        let elvesRations: Array<ElfRation> = getElfRations(input: input)
         findHighest3ElfCalories(elvesRations)
     }
     
@@ -52,7 +33,7 @@ class Day1: DayProtocol {
     fileprivate func findHighest3ElfCalories(_ elvesRations: Array<ElfRation>) {
         let calorieTotals: Array<Calories>  = getArrayOfRationTotalsFromElves(elvesRations)
         let highest3CalorieElements: Array<Calories> = calorieTotals.sorted(by: >)
-        tabbedPrint("Sum of top three highest-calorie rations: ", highest3CalorieElements.prefix(3).reduce(0, +))
+        print(highest3CalorieElements.prefix(3).reduce(0, +))
     }
     
     fileprivate func getElfRations(input: Array<Substring>) -> Array<ElfRation> {

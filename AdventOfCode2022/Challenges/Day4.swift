@@ -11,16 +11,6 @@ class Day4: DayProtocol {
     var sampleInput: String = "day4sample.txt"
     var dayInput: String = "day4input.txt"
     
-    func day4() {
-        let sampleInput: [Substring] = readSampleInput()
-        let dayInput: [Substring] = readDayInput()
-        
-        solvePart1(sampleInput)
-        solvePart1(dayInput)
-        solvePart2(sampleInput)
-        solvePart2(dayInput)
-    }
-    
     func solvePart1(_ input: [Substring]) {
         let splitLines = splitLines(input)
         let integerValues = convertValuesToIntegers(splitLines)

@@ -11,15 +11,6 @@ class Day5: DayProtocol {
     var sampleInput: String = "day5sample.txt"
     var dayInput: String = "day5input.txt"
     
-    func day5() {
-        let sampleInput: [Substring] = readSampleInput()
-        let dayInput: [Substring] = readDayInput()
-        solvePart1(sampleInput)
-        solvePart1(dayInput)
-        solvePart2(sampleInput)
-        solvePart2(dayInput)
-    }
-    
     func solvePart1(_ input: [Substring]) {
         let cargoInstructionTuple = separateCargoFromInstructions(input)
         let formattedCargo = createCargoDataStructure(cargoInstructionTuple.0, cargoInstructionTuple.1)

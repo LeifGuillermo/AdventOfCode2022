@@ -10,6 +10,11 @@ import Foundation
 protocol DayProtocol {
     var sampleInput: String { get }
     var dayInput: String { get }
+    func solveDay()
+    func readSampleInput() -> Array<Substring>
+    func readDayInput() -> Array<Substring>
+    func solvePart1(_ input: [Substring])
+    func solvePart2(_ input: [Substring])
 }
 
 extension DayProtocol {
@@ -23,6 +28,15 @@ extension DayProtocol {
     
     func readDayInput() -> Array<Substring> {
         return readInput(dayInput)
+    }
+    
+    func solveDay() {
+        let sampleInput: [Substring] = readSampleInput()
+        let dayInput: [Substring] = readDayInput()
+        solvePart1(sampleInput)
+        solvePart1(dayInput)
+        solvePart2(sampleInput)
+        solvePart2(dayInput)
     }
 }
 

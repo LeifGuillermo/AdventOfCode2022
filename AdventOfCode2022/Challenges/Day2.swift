@@ -11,22 +11,23 @@ class Day2: DayProtocol {
     let sampleInput = "day2sample.txt"
     let dayInput = "day2input.txt"
     
-    func day2() throws {
-        let sampleInput: Array<Substring> = readSampleInput()
-        let dayInput: Array<Substring> = readDayInput()
-        
-        try solve(sampleInput)
-        try solve(dayInput)
-    }
-    
-    func solve(_ input: Array<Substring>) throws {
+    func solvePart1(_ input: [Substring]) {
         let rockPaperScissorRounds: [Array<Substring>] = convertNewlineEntriesToSubstringArraysSplitBySpaces(input)
-        
-        let score: Int = try part1(rockPaperScissorRounds)
-        let part2score: Int = try part2(rockPaperScissorRounds)
-        
-        print("Part 1 Total Score: ", score)
-        print("Part 2 Total Score: ", part2score)
+        do {
+            let result = try rockPaperScissorRounds.map {
+                try calculatePointsGivenChoices(opponentChoice: String($0[0]), playerChoice: String($0[1]))
+            }.reduce(0, +)
+            print(result)
+        } catch { print("There was an exception thrown in Day2 part 1") }
+    }
+    func solvePart2(_ input: [Substring]) {
+        let rockPaperScissorRounds: [Array<Substring>] = convertNewlineEntriesToSubstringArraysSplitBySpaces(input)
+        do {
+            let result = try rockPaperScissorRounds.map {
+                try calculatePointsGivenStrategy(otherPlayerChoice: String($0[0]), playerStrategy: String($0[1]))
+            }.reduce(0, +)
+            print(result)
+        } catch { print("There was an exception thrown in Day2 part 2")}
     }
     
     func part1(_ rockPaperScissorRounds: [Array<Substring>]) throws -> Int{

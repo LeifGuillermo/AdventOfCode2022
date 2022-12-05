@@ -17,6 +17,7 @@
 		296A9E18293A92A20093769E /* Day3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E17293A92A20093769E /* Day3.swift */; };
 		296A9E1C293CE9240093769E /* Day4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E1B293CE9240093769E /* Day4.swift */; };
 		296A9E20293E504B0093769E /* Day5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E1F293E504B0093769E /* Day5.swift */; };
+		296A9E24293E8B760093769E /* Day6.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296A9E23293E8B760093769E /* Day6.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -53,6 +54,9 @@
 		296A9E1F293E504B0093769E /* Day5.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day5.swift; sourceTree = "<group>"; };
 		296A9E21293E505F0093769E /* day5sample.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day5sample.txt; sourceTree = "<group>"; };
 		296A9E22293E50760093769E /* day5input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day5input.txt; sourceTree = "<group>"; };
+		296A9E23293E8B760093769E /* Day6.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day6.swift; sourceTree = "<group>"; };
+		296A9E25293E8BA20093769E /* day6sample.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day6sample.txt; sourceTree = "<group>"; };
+		296A9E26293E8BB40093769E /* day6input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = day6input.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 				296A9E1D293CE9620093769E /* day4input.txt */,
 				296A9E21293E505F0093769E /* day5sample.txt */,
 				296A9E22293E50760093769E /* day5input.txt */,
+				296A9E25293E8BA20093769E /* day6sample.txt */,
+				296A9E26293E8BB40093769E /* day6input.txt */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -120,6 +126,7 @@
 				296A9E17293A92A20093769E /* Day3.swift */,
 				296A9E1B293CE9240093769E /* Day4.swift */,
 				296A9E1F293E504B0093769E /* Day5.swift */,
+				296A9E23293E8B760093769E /* Day6.swift */,
 			);
 			path = Challenges;
 			sourceTree = "<group>";
@@ -194,6 +201,7 @@
 				296A9E0A2938F4400093769E /* Utility.swift in Sources */,
 				296A9E1229394E7A0093769E /* Day2.swift in Sources */,
 				296A9E1429394EF80093769E /* DayProtocol.swift in Sources */,
+				296A9E24293E8B760093769E /* Day6.swift in Sources */,
 				296A9E0F29390AD50093769E /* Day1.swift in Sources */,
 				296A9E082938F4230093769E /* InputDirectoryConfig.swift in Sources */,
 				296A9DFE2938F3AB0093769E /* main.swift in Sources */,
