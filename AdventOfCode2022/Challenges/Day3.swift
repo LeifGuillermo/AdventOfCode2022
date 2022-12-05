@@ -60,11 +60,7 @@ class Day3: DayProtocol {
     func convertCharactersToUInt8Values(_ chars: Array<Substring>) -> [Int] {
         return chars.map{ char in
             let value = char.asciiValues.first!
-            if(value > 96) {
-                return (value - 96)
-            } else {
-                return (value - 38)
-            }
+            return (value > 96) ? (value - 96) : (value - 38)
         }.map{numericCast($0)}
     }
     
