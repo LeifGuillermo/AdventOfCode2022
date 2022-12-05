@@ -51,23 +51,34 @@ class Day4: DayProtocol {
         }
     }
     
-    func validatePairs(_ pairs: [[[Int]]], _ validationFunc: ([Int], [Int]) -> Int) -> [Int] {
-        return pairs.map { validationFunc($0.first!, $0.last!) }
+    func validatePairs(_ pairs: [[[Int]]], _ validationFunc: ((Int, Int), (Int, Int)) -> Int) -> [Int] {
+        return pairs.map { pair in
+            let tuple1 = (pair.first!.first!, pair.first!.last!)
+            let tuple2 = (pair.last!.first!, pair.last!.last!)
+            return validationFunc(tuple1, tuple2)
+        }
     }
     
-    func validateSinglePairFullOverlap(_ pair1: [Int],_ pair2: [Int]) -> Int{
-        let leftIsInside: Bool = (pair1.first! >= pair2.first! && pair1.first! <= pair2.last!)
-        && (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
-        let rightIsInside: Bool = (pair2.first! >= pair1.first! && pair2.first! <= pair1.last!)
-        && (pair2.last! >= pair1.first! && pair2.last! <= pair1.last!)
+    func validateSinglePairFullOverlap(_ tuple1: (Int, Int),_ tuple2: (Int, Int)) -> Int{
+        let leftIsInside: Bool = valueOverlapsPair(value: tuple1.0, pair: tuple2)
+        && valueOverlapsPair(value: tuple1.1, pair: tuple2)
+        
+        let rightIsInside: Bool = valueOverlapsPair(value: tuple2.0, pair: tuple1)
+        && valueOverlapsPair(value: tuple2.1, pair: tuple1)
+        
         return ((leftIsInside || rightIsInside) ? 1 : 0)
     }
     
-    func validateSinglePairAnyOverlap(_ pair1: [Int],_ pair2: [Int]) -> Int{
-        let leftIsInside: Bool = (pair1.first! >= pair2.first! && pair1.first! <= pair2.last!)
-        || (pair1.last! >= pair2.first! && pair1.last! <= pair2.last!)
-        let rightIsInside: Bool = (pair2.first! >= pair1.first! && pair2.first! <= pair1.last!)
-        || (pair2.last! >= pair1.first! && pair2.last! <= pair1.last!)
+    func validateSinglePairAnyOverlap(_ tuple1: (Int, Int),_ tuple2: (Int, Int)) -> Int{
+        let leftIsInside: Bool = valueOverlapsPair(value: tuple1.0, pair: tuple2)
+        || valueOverlapsPair(value: tuple1.1, pair: tuple2)
+        
+        let rightIsInside: Bool = valueOverlapsPair(value: tuple2.0, pair: tuple1)
+        || valueOverlapsPair(value: tuple2.1, pair: tuple1)
         return ((leftIsInside || rightIsInside) ? 1 : 0)
+    }
+    
+    func valueOverlapsPair(value: Int, pair: (Int, Int)) -> Bool {
+        return value >= pair.0 && value <= pair.1
     }
 }
