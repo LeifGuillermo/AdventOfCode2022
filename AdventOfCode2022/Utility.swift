@@ -40,3 +40,27 @@ extension Array {
         }
     }
 }
+
+extension StringProtocol {
+    func getSubSequenceAfter(_ start: Int, _ length: Int) -> SubSequence{
+        return getSubSequence(start, start+length)
+    }
+    func getSubSequenceBetween(_ start: Int, _ end: Int) -> SubSequence{
+        return getSubSequence(start, end)
+    }
+    func getSubSequenceBefore(_ at: Int, _ precedingLength: Int) -> SubSequence{
+        return getSubSequence(at, at - precedingLength)
+    }
+    func getSubSequence(_ beginningIndex: Int, _ endIndex: Int) -> SubSequence {
+        let startIndex = self.index(self.startIndex, offsetBy: beginningIndex)
+        let endIndex = self.index(self.startIndex, offsetBy: endIndex)
+        return self[startIndex..<endIndex]
+    }
+    func applyFuncToSubSequence(_ seqStart: Int, _ seqEnd: Int, _ function: (SubSequence) -> Any ) -> Any {
+        return function(getSubSequence(seqStart, seqEnd))
+    }
+    func removeDuplicateCharacters() -> String {
+        let selfSet = Set(self)
+        return String(selfSet)
+    }
+}
