@@ -33,10 +33,15 @@ extension DayProtocol {
     func solveDay() {
         let sampleInput: [Substring] = readSampleInput()
         let dayInput: [Substring] = readDayInput()
-        solvePart1(sampleInput)
-        solvePart1(dayInput)
-        solvePart2(sampleInput)
-        solvePart2(dayInput)
+        solveDayPrintInputType(sampleInput, "Part 1 with Sample Input:", solvePart1)
+        solveDayPrintInputType(dayInput, "Part 1 with Day Input:", solvePart1)
+        solveDayPrintInputType(sampleInput, "Part 2 with Sample Input:", solvePart2)
+        solveDayPrintInputType(dayInput, "Part 2 with Day Input:", solvePart2)
+    }
+    
+    func solveDayPrintInputType(_ input: [Substring], _ inputName: String, _ solveFunction: ([Substring]) -> Void) {
+        print(inputName)
+        solveFunction(input)
     }
 }
 
